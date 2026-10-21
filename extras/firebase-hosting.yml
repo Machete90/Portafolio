@@ -1,0 +1,19 @@
+# OPCIONAL: publica en Firebase Hosting cada vez que subes cambios a GitHub.
+# Para activarlo: muévelo a  .github/workflows/firebase-hosting.yml
+# y crea el secreto FIREBASE_SERVICE_ACCOUNT (lo más fácil: ejecuta  firebase init hosting:github
+# en tu computadora y sigue los pasos; crea el secreto y este archivo por ti).
+name: Deploy a Firebase Hosting
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          channelId: live
+          projectId: TU-PROYECTO-FIREBASE
